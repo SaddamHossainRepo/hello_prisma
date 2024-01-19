@@ -15,20 +15,36 @@ const createPostController = async (req: Request, res: Response) => {
   }
 };
 
-const getPost = async (req: Request, res: Response) => {
+const getAllPosts = async (req: Request, res: Response) => {
   try {
-    const result = await postService.getPost();
+    const result = await postService.getAllPost();
     res.send({
-        success: true,
-        message: "posts get successfully",
-        data: result
-    })
+      success: true,
+      message: "posts fetched successfully",
+      data: result,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
+  }
+};
+
+const getSinglePost = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const result = await postService.getSinglePost(id);
+    console.log(result);
+    res.send({
+      success: true,
+      message: "post get successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const postController = {
   createPostController,
-  getPost
+  getAllPosts,
+  getSinglePost,
 };

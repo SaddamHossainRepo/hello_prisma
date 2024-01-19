@@ -50,7 +50,7 @@ const getUsers = async () => {
 const getSingleUser = async (id: number) => {
   const result = await prisma.user.findUnique({
     where: {
-      id,
+      id: id,
     },
     include: {
       profile: true,
